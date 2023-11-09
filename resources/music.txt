@@ -1,0 +1,7 @@
+AlbumZero:cover=1200.png;duration=3:8;album=AlbumZero
+What's Inside - Single:cover=1201.png;duration=3:16;album=A Door Apart
+Horizon - SundLy:cover=1202.png;duration:6:0;album=The Last Ultimatum
+Ride My Tempo:cover=1204.png;album=Further Down The Street;duration=6:0
+Coming Out To Play:duration=2:27;album=Another Leonard;cover=1203.png
+Ride My Tempo Again:cover=1204.png;album=Further Down The Street;duration=6:0
+One:cover=1200.png;duration=4:10;album=AlbumZero

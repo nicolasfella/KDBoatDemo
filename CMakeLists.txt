@@ -7,21 +7,26 @@
 # Contact info@kdab.com for more information about this software.
 #
 
-project(KDABBoatDemo)
 cmake_minimum_required(VERSION 3.9)
-find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Quick)
+project(KDABBoatDemo)
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Quick Widgets)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_AUTORCC TRUE)
 
+qt5_add_resources(RESOURCES imagesMaps.qrc imagesMaps2.qrc images.qrc data.qrc qml.qrc)
+
 add_executable(KDABBoatDemo
   main.cpp
-  imagesMaps.qrc
-  imagesMaps2.qrc
-  images.qrc
-  data.qrc
+  windowdata.cpp
+  musicmodel.cpp
+  ${RESOURCES}
 )
 
-target_link_libraries(KDABBoatDemo Qt5::Core Qt5::Gui Qt5::Quick)
+target_link_libraries(KDABBoatDemo Qt5::Core Qt5::Gui Qt5::Quick Qt5::Widgets)
+
+add_executable(listmusic listmusic.cpp musicmodel.cpp data.qrc)
+
+target_link_libraries(listmusic Qt5::Core)
 
 install(TARGETS KDABBoatDemo RUNTIME DESTINATION bin)

@@ -10,6 +10,7 @@
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import com.kdab.boat 1.0
 
 Item {
     id: playItem
@@ -45,8 +46,9 @@ Item {
                 snapMode: ListView.SnapToItem
                 highlightFollowsCurrentItem : true
                 delegate: playDelegate
-                model: PlayData {
+                model: MusicModel {
                     id: playdata
+                    sourceFile: "music.txt"
                 }
 
                 Component {
@@ -75,7 +77,7 @@ Item {
                             anchors.horizontalCenterOffset: -140
                             width: playList.currentIndex == index ? 64 : 54
                             height: width
-                            source: "/albumcovers/resources/albumcover/"+coverd
+                            source: "/albumcovers/resources/albumcover/"+model.cover
                             smooth: true
                             Behavior on width {
                                 NumberAnimation {  duration: 300; easing.type: Easing.InOutQuad }
@@ -87,7 +89,7 @@ Item {
                             x: 83
                             y: 8
                             color: "#fff"
-                            text: titled
+                            text: name
                             font.family: openThin.name
                             font.pixelSize: 19
                             smooth: true
@@ -99,7 +101,7 @@ Item {
                             x: 298
                             y: 14
                             color: "#fff"
-                            text: durationd
+                            text: duration
                             font.pixelSize: 14
                             font.family: openThin.name
                             smooth: true
@@ -124,7 +126,7 @@ Item {
         Text {
             id: textNowMusic
             color: "#fff"
-            text: (selectingmode.running || refadeCover.running) ? playdata.get(playList.currentIndex).titled : playdata.get(musicIndex).titled
+            text: (selectingmode.running || refadeCover.running) ? playdata.data(playdata.index(playList.currentIndex, 0), MusicModel.NameRole) : playdata.data(playdata.index(musicIndex, 0), MusicModel.NameRole)
             font.family: openThin.name
             font.pixelSize: 32
             opacity: cover.opacity
@@ -133,7 +135,7 @@ Item {
         Text {
             id: textNowAlbum
             color: "#fff"
-            text: (selectingmode.running || refadeCover.running) ? playdata.get(playList.currentIndex).album : playdata.get(musicIndex).album
+            text: (selectingmode.running || refadeCover.running) ? playdata.data(playdata.index(playList.currentIndex, 0), MusicModel.AlbumRole) : playdata.data(playdata.index(playList.musicIndex, 0), MusicModel.AlbumRole)
             font.family: openThin.name
             font.pixelSize: 28
             opacity: cover.opacity
@@ -146,7 +148,7 @@ Item {
                 id: cover
                 width: Math.max( Math.min( playItem.height - 255 , sourceSize.height), 140 )
                 height: width
-                source: "/albumcovers/resources/albumcover/" + ((selectingmode.running || refadeCover.running) ? playdata.get(playList.currentIndex).coverd : playdata.get(musicIndex).coverd)
+                source: "/albumcovers/resources/albumcover/" + ((selectingmode.running || refadeCover.running) ? playdata.data(playdata.index(playList.currentIndex, 0), MusicModel.CoverRole) : playdata.data(playdata.index(musicIndex, 0), MusicModel.CoverRole))
 
                 Behavior on opacity {
                     NumberAnimation { duration: 800; easing.type: Easing.InOutQuad }

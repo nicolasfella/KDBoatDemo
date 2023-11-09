@@ -14,7 +14,11 @@
 #include <QGuiApplication>
 #include <QCursor>
 #include <QCommandLineParser>
-#include <QScreen>
+#include <QApplication>
+#include <QDesktopWidget>
+
+#include "windowdata.h"
+#include "musicmodel.h"
 
 /**
  * KDAB Boat demo
@@ -23,7 +27,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     QCommandLineParser parser;
     parser.setApplicationDescription("KDAB Nautical UI - concept of the next generation UI for sailing boats");
@@ -77,27 +81,16 @@ int main(int argc, char *argv[])
         } else if (parser.isSet(landscapeOption)) {
             return false;
         } else {
-            QSize primaryGeometry = primaryScreen->size();
-            return (primaryGeometry.height() > primaryGeometry.width());
+            QSize screenSize = QApplication::desktop()->size();
+            return (screenSize.height() > screenSize.width());
         }
     }();
     engine.rootContext()->setContextProperty("_portrait", QVariant::fromValue(portrait));
 
-    const bool isLowRes = [&]() {
-        if (parser.isSet(lowresOption))
-            return true;
-        QSize primaryGeometry = primaryScreen->size();
-        return primaryGeometry.width() < 1280 || primaryGeometry.height() < 720;
-    }();
-    engine.rootContext()->setContextProperty("_isLowRes", QVariant::fromValue(isLowRes));
-
-    if (isLowRes) {
-        engine.rootContext()->setContextProperty("_windowWidth", QVariant::fromValue(portrait ? 480 : 800));
-        engine.rootContext()->setContextProperty("_windowHeight", QVariant::fromValue(portrait ? 800 : 480));
-    } else {
-        engine.rootContext()->setContextProperty("_windowWidth", QVariant::fromValue(portrait ? 720 : 1280));
-        engine.rootContext()->setContextProperty("_windowHeight", QVariant::fromValue(portrait ? 1280 : 720));
-    }
+    qmlRegisterType<MusicModel>("com.kdab.boat", 1, 0, "MusicModel");
+    qmlRegisterSingletonType<WindowData>("com.kdab.boat", 1, 0, "WindowData", [portrait](QQmlEngine *, QJSEngine *) -> QObject * {
+        return new WindowData(portrait);
+    });
 
     const QUrl url(QStringLiteral("qrc:/resources/Main.qml"));
     QObject::connect(

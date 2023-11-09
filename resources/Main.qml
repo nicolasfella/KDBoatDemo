@@ -10,11 +10,12 @@
 
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import com.kdab.boat 1.0
 
 ApplicationWindow {
     id: base
-    width: _windowWidth
-    height: _windowHeight
+    width: WindowData.width
+    height: WindowData.height
     visible: true
     visibility: _showFullscreen ? ApplicationWindow.FullScreen : ApplicationWindow.Windowed
     property int musicIndex: 0
@@ -64,7 +65,7 @@ ApplicationWindow {
                 Loader {
                     clip: true
                     visible: SwipeView.isCurrentItem
-                    sourceComponent: _isLowRes ? smallBoatStatus : normalBoatStatus
+                    sourceComponent: WindowData.isLowRes ? smallBoatStatus : normalBoatStatus
                     Component {
                         id: normalBoatStatus
                         BoatStatusContents { }
@@ -78,7 +79,7 @@ ApplicationWindow {
                 Loader {
                     clip: true
                     visible: SwipeView.isCurrentItem
-                    sourceComponent: _isLowRes ? smallBoatSailing : normalBoatSailing
+                    sourceComponent: WindowData.isLowRes ? smallBoatSailing : normalBoatSailing
                     Component {
                         id: normalBoatSailing
                         BoatSailingContents { }

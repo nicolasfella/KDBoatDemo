@@ -9,7 +9,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 project(KDABBoatDemo)
-find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Quick Widgets)
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Gui Quick Widgets Test)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC TRUE)
 set(CMAKE_AUTORCC TRUE)
@@ -27,6 +27,6 @@ target_link_libraries(KDABBoatDemo Qt5::Core Qt5::Gui Qt5::Quick Qt5::Widgets)
 
 add_executable(listmusic listmusic.cpp musicmodel.cpp data.qrc)
 
-target_link_libraries(listmusic Qt5::Core)
+target_link_libraries(listmusic Qt5::Core Qt5::Test)
 
 install(TARGETS KDABBoatDemo RUNTIME DESTINATION bin)

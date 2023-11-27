@@ -4,6 +4,5 @@
         <file>resources/images/maps/radarbase.png</file>
         <file>resources/images/maps/radarbase1.png</file>
         <file>resources/images/maps/shot18.png</file>
-        <file>resources/images/maps/shot18.ktx</file>
     </qresource>
 </RCC>

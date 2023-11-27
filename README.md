@@ -1,47 +1,29 @@
-KD Boat UI Demo
-===============
-KDAB Nautical UI - concept of the next generation UI for sailing boats
+# Boat Demo Exercise
 
-Try KD Boat Demo in your web browser! visit https://demos.kdab.com/wasm/kdboatdemo/
+This application demonstrates a UI concept for a sailing boat. It is currently based on Qt5 and we are going to port it to Qt6.
 
-Contact
-=======
-* Visit us on GitHub: https://github.com/KDAB/KDBoatDemo
-* Email info@kdab.com for questions about copyright, licensing or sales.
+## 0. Build the project against Qt5
 
-Stay up-to-date with KDAB product announcements:
+Open the project in an IDE/Editor of your choice and built it.
 
-* [KDAB Newsletter](https://news.kdab.com)
-* [KDAB Blogs](https://www.kdab.com/category/blogs)
-* [KDAB on Twitter](https://twitter.com/KDABQt)
+The project consists of two executables. A small `listmusic` executable that parses a file with music information and prints it, and the `KDABBoatDemo` GUI application.
 
-Licensing
-=========
-KDBoatDemo is (C) 2013-2021, Klarälvdalens Datakonsult AB, and is available under the
-terms of the [MIT](https://github.com/KDAB/KDBindings/blob/main/LICENSES/MIT.txt) license.
+Run the project and play around with it.
 
-This project also includes some [Google Fonts](https://fonts.google.com/) which are available
-under the [SIL Open Font License](https://github.com/KDAB/KDBoatDemo/blob/master/LICENSES/OFC-1.1.txt)
-or the [APACHE License](https://github.com/KDAB/KDBoatDemo/blob/master/LICENSES/Apache-2.0.txt).
+## 1. Build System
 
-Get Involved
-============
-Please submit your contributions or issue reports from our GitHub space at
-https://github.com/KDAB/KDBoatDemo
+Adjust the CMake code to make it configure against Qt6 while keeping compatibility with Qt5.
 
-Contact info@kdab.com for more information.
+Do not attempt to build the project yet.
 
-About KDAB
-==========
-KDBoatDemo is supported and maintained by Klarälvdalens Datakonsult AB (KDAB).
+## 2. C++ Code
 
-The KDAB Group is the global No.1 software consultancy for Qt, C++ and
-OpenGL applications across desktop, embedded and mobile platforms.
+Make the C++ code build against Qt6 while keeping compatibility with Qt5.
 
-The KDAB Group provides consulting and mentoring for developing Qt applications
-from scratch and in porting from all popular and legacy frameworks to Qt.
-We continue to help develop parts of Qt and are one of the major contributors
-to the Qt Project. We can give advanced or standard trainings anywhere
-around the globe on Qt as well as C++, OpenGL, 3D and more.
+## 3. QML Code
 
-Please visit https://www.kdab.com to meet the people who write code like this.
+Adjust the QML code so that the app runs with Qt6. Make sure the music playlist works as expected.
+
+## 4. Modernization
+
+Modernize the QML code based on what you just learned. You can use `qmllint` as a guide.
